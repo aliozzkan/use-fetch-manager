@@ -15,7 +15,7 @@ const FetchContext = createContext({} as FetchContextType);
 
 export function useFetchManagerProvider() {
   const [data, setData] = useState<FetchContextType["data"]>({});
-  return [data, setData];
+  return {data, setData, FetchContext};
 }
 
 export function useFetchGlobal() {
