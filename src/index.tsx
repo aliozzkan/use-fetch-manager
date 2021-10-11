@@ -107,15 +107,23 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
 
   return {
     data: (!!options.globalKey
-      ? globalFetch.data[options.globalKey].data
+      ? globalFetch["data"] &&
+        globalFetch["data"][options.globalKey] &&
+        globalFetch["data"][options.globalKey].status
       : data) as ThenArg<D> | null,
     onReset: reset,
     fetch: processAsync,
     status: !!options.globalKey
-      ? globalFetch.data[options.globalKey].status
+      ? globalFetch["data"] &&
+        globalFetch["data"][options.globalKey] &&
+        globalFetch["data"][options.globalKey].status
       : status,
     hasData: !!((
-      !!options.globalKey ? globalFetch.data[options.globalKey].data : data
+      !!options.globalKey
+        ? globalFetch["data"] &&
+          globalFetch["data"][options.globalKey] &&
+          globalFetch["data"][options.globalKey].data
+        : data
     ) as ThenArg<D> | null),
     isFullfilled: status === Fulfilled,
     isPending: status === Pending,
