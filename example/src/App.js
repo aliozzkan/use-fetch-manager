@@ -1,13 +1,24 @@
-import React from 'react'
+import React from "react";
 
-import { useMyHook } from 'use-fetch-manager'
+import { useFetchManager } from "use-fetch-manager";
+
+function fetchPosts() {
+  return fetch("http://example.com/movies.json").then((response) =>
+    response.json()
+  );
+}
 
 const App = () => {
-  const example = useMyHook()
-  return (
-    <div>
-      {example}
-    </div>
-  )
-}
-export default App
+  const {
+    data,
+    fetch,
+    hasData,
+    isFullfilled,
+    isPending,
+    isRejected,
+    onReset,
+    status,
+  } = useFetchManager(fetchPosts);
+  return <div>{status}</div>;
+};
+export default App;

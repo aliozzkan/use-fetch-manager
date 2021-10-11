@@ -13,24 +13,24 @@ npm install --save use-fetch-manager
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import * as React from "react";
 
-import { useMyHook } from 'use-fetch-manager'
+import { useFetchManager } from "use-fetch-manager";
 
 const Example = () => {
-  const example = useMyHook()
-  return (
-    <div>
-      {example}
-    </div>
-  )
-}
+  const { fetch, isFulfilled, isRejected, status, reset } = useFetchManager(
+    () => fetch("url")
+  );
+
+  useEffect(() => {
+    fetch();
+  }, [])
+
+  return <div>{status}</div>;
+};
 ```
 
 ## License
 
 MIT © [aliozzkan](https://github.com/aliozzkan)
 
----
-
-This hook is created using [create-react-hook](https://github.com/hermanya/create-react-hook).
