@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/use-fetch-manager/static/css/main.2c6a48fe.chunk.css",
+    "main.js": "/use-fetch-manager/static/js/main.f2b06c63.chunk.js",
+    "main.js.map": "/use-fetch-manager/static/js/main.f2b06c63.chunk.js.map",
+    "runtime-main.js": "/use-fetch-manager/static/js/runtime-main.84e1744d.js",
+    "runtime-main.js.map": "/use-fetch-manager/static/js/runtime-main.84e1744d.js.map",
+    "static/js/2.d4d33973.chunk.js": "/use-fetch-manager/static/js/2.d4d33973.chunk.js",
+    "static/js/2.d4d33973.chunk.js.map": "/use-fetch-manager/static/js/2.d4d33973.chunk.js.map",
+    "index.html": "/use-fetch-manager/index.html",
+    "precache-manifest.d5f55ec91ba01229049382d641a0491c.js": "/use-fetch-manager/precache-manifest.d5f55ec91ba01229049382d641a0491c.js",
+    "service-worker.js": "/use-fetch-manager/service-worker.js",
+    "static/css/main.2c6a48fe.chunk.css.map": "/use-fetch-manager/static/css/main.2c6a48fe.chunk.css.map",
+    "static/js/2.d4d33973.chunk.js.LICENSE.txt": "/use-fetch-manager/static/js/2.d4d33973.chunk.js.LICENSE.txt",
+    "static/js/main.f2b06c63.chunk.js.LICENSE.txt": "/use-fetch-manager/static/js/main.f2b06c63.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.84e1744d.js",
+    "static/js/2.d4d33973.chunk.js",
+    "static/css/main.2c6a48fe.chunk.css",
+    "static/js/main.f2b06c63.chunk.js"
+  ]
+}
