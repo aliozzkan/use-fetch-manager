@@ -109,7 +109,7 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
     data: (!!options.globalKey
       ? globalFetch["data"] &&
         globalFetch["data"][options.globalKey] &&
-        globalFetch["data"][options.globalKey].status
+        globalFetch["data"][options.globalKey].data
       : data) as ThenArg<D> | null,
     onReset: reset,
     fetch: processAsync,
