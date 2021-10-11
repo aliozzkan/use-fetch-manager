@@ -1,0 +1,23 @@
+import { createContext, useContext, useState } from "react";
+import { Status } from "../model";
+
+type FetchContextType = {
+  data: {
+    [key: string]: {
+      data: any;
+      status: Status;
+    };
+  };
+  setData: any;
+};
+
+const FetchContext = createContext({} as FetchContextType);
+
+export function useFetchManagerProvider() {
+  const [data, setData] = useState<FetchContextType["data"]>({});
+  return [data, setData];
+}
+
+export function useFetchGlobal() {
+  return useContext(FetchContext);
+}
