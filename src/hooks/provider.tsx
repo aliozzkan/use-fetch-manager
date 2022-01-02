@@ -6,6 +6,7 @@ type FetchContextType = {
     [key: string]: {
       data: any;
       status: Status;
+      error: any;
     };
   };
   setData: any;

@@ -23,11 +23,13 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
   isPending: boolean;
   hasData: boolean;
   data: ThenArg<D> | null;
+  error: any;
   onReset: () => void;
   status: Status;
 } {
   const [data, setData] = useState<ThenArg<ReturnType<T>> | null>(null);
   const [status, setStatus] = useState<Status>(null);
+  const [error, setError] = useState<any>(null);
   const globalFetch = useFetchGlobal();
 
   async function processAsync(
@@ -53,17 +55,19 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
             ...prev[options.globalKey!],
             data: _data,
             status: Fulfilled,
+            error: null,
           },
         }));
       } else {
         setData(_data);
         setStatus(Fulfilled);
+        setError(null);
       }
       if (!!options.onSuccess) {
         options.onSuccess(_data);
       }
       return _data;
-    } catch (error) {
+    } catch (_error) {
       if (!!options.globalKey) {
         globalFetch.setData((prev: any) => ({
           ...prev,
@@ -71,10 +75,12 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
             ...prev[options.globalKey!],
             data: null,
             status: Rejected,
+            error: _error,
           },
         }));
       } else {
         setStatus(Rejected);
+        setData(_error as unknown as any);
       }
       if (!!options.onReject) {
         options.onReject();
@@ -91,11 +97,13 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
           ...prev[options.globalKey!],
           data: null,
           status: null,
+          error: null,
         },
       }));
     } else {
       setData(null);
       setStatus(null);
+      setError(null);
     }
   }
 
@@ -125,8 +133,25 @@ export function useFetchManager<T extends (...args: any) => any, D = any>(
           globalFetch["data"][options.globalKey].data
         : data
     ) as ThenArg<D> | null),
-    isFullfilled: status === Fulfilled,
-    isPending: status === Pending,
-    isRejected: status === Rejected,
+    isFullfilled: (!!options.globalKey
+      ? globalFetch["data"] &&
+        globalFetch["data"][options.globalKey] &&
+        globalFetch["data"][options.globalKey].status === "fulfilled"
+      : status === "fulfilled") as boolean,
+    isPending: (!!options.globalKey
+      ? globalFetch["data"] &&
+        globalFetch["data"][options.globalKey] &&
+        globalFetch["data"][options.globalKey].status === "pending"
+      : status === "pending") as boolean,
+    isRejected: (!!options.globalKey
+      ? globalFetch["data"] &&
+        globalFetch["data"][options.globalKey] &&
+        globalFetch["data"][options.globalKey].status === "rejected"
+      : status === "rejected") as boolean,
+    error: (!!options.globalKey
+      ? globalFetch["data"] &&
+        globalFetch["data"][options.globalKey] &&
+        globalFetch["data"][options.globalKey].error
+      : error) as ThenArg<D> | null,
   };
 }
